@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using StudiaPraca.Models;
 using StudiaPraca.Contexts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StudiaPraca
 {
@@ -17,6 +18,7 @@ namespace StudiaPraca
         }
 
         // GET: api/students
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {

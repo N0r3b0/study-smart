@@ -8,6 +8,8 @@ namespace StudiaPraca.Contexts
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
+        public DbSet<User> Users { get; set; } // Users table might need a change for students admins planners etc for the future
+
         public DbSet<ChosenHour> ChosenHours { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<PreferredHour> PreferredHours { get; set; }
@@ -45,6 +47,12 @@ namespace StudiaPraca.Contexts
                 .HasOne(sl => sl.Lecturer)
                 .WithMany(l => l.StudentsLectures)
                 .HasForeignKey(sl => sl.LecturerId);
+
+
+            // Seed data for User with password = "password"
+            modelBuilder.Entity<User>().HasData(
+                new User { Id = 1, Username = "admin", Email = "test@test.com", Password = "$2a$11$CcoleKoLGIDchqqPt3P6i.mQFy4X/UilynKTnOIbTt8zXtuVYVyae" }
+            );
         }
     }
 }
